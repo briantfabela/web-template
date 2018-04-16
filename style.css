@@ -35,7 +35,7 @@ li a:hover,
 }
 
 li a.active {
-    background-color: #b71648;
+    background-color: #1565C0;
     color: white;
 }
 
@@ -69,7 +69,7 @@ li.dropdown {
 }
 
 a {
-    color: #b71648;
+    color: #1565C0;
     font-weight: bold;
     text-decoration: none;
 }
@@ -79,10 +79,10 @@ p {
 }
 
 #drop_active {
-    background-color: #b71648;
+    background-color: #1565C0;
 }
 
-#p5_image {
+#world_image {
     float: left;
     min-width: 150px;
     max-width: 400px;
@@ -112,31 +112,6 @@ p {
     text-align: center;
 }
 
-#p5js {
-    color: #b71648;
+#main_title {
+    color: #1565C0;
 }
-
-#xenon {
-    font-family: 'Press Start 2P', cursive;
-    text-align: center;
-    font-size: 45px;
-    color: #00ff00;
-    text-shadow:  -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black, 2px 5px 2px black;
-}
-
-#final_sketch {
-    text-align: center;
-}
-
-#c1 {
-    padding: 2%;
-    padding-right: 0;
-    padding-top: 0;
-    float: right;
-}
-
-#c2 {
-    padding: 2%;
-    padding-right: 0;
-    padding-top: 0;
-    float: right;
