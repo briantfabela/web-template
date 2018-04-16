@@ -115,3 +115,10 @@ p {
 #main_title {
     color: #1565C0;
 }
+
+#map {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 600px;
+}

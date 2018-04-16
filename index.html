@@ -1,12 +1,17 @@
 <!DOCTYPE html>
 
- <html>
-  <head>
-    <title></title>
+<html>
+
+<head>
+    <title>Portfolio template</title>
     <meta charset="UTF-8">
-    <!-- style sheets -->
+    <!-- style sheet -->
     <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Mono|Roboto:300" rel="stylesheet">
+    <!-- mapbox.js links for webmap-->
+    <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
 </head>
 
 <body>
@@ -27,5 +32,22 @@
     <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.<br></p>
     <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
     <h1 id="semi_title" style="font-size: 40px; margin-top: 40px;"> Sample Project:</h1>
+
+    <div id='map'></div>
+    <script>
+        L.mapbox.accessToken = 'pk.eyJ1IjoiYnJpYW50ZmEiLCJhIjoiY2oycXJkYXZ1MDAwejJxbzd5d3BkYnZwYyJ9.Xluun3A4EHAaiUUC9Y-HGA';
+        var map = L.mapbox.map('map', 'mapbox.streets')
+            .setView([0, 0], 2);
+
+        L.control.layers({
+            'Mapbox Streets': L.mapbox.tileLayer('mapbox.streets').addTo(map),
+            'Mapbox Light': L.mapbox.tileLayer('mapbox.light'),
+            'Mapbox Dark': L.mapbox.tileLayer('mapbox.dark'),
+            'Mapbox Satelite': L.mapbox.tileLayer('mapbox.satellite')
+        }).addTo(map);
+    </script>
+    
+    <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 </body>
+
 </html>
