@@ -39,13 +39,16 @@
 
     <div id='map'></div>
     <script>
+        // YOU NEED THIS TOKEN TO ACCESS THE MAPBOX API
         L.mapbox.accessToken = 'pk.eyJ1IjoiYnJpYW50ZmEiLCJhIjoiY2oycXJkYXZ1MDAwejJxbzd5d3BkYnZwYyJ9.Xluun3A4EHAaiUUC9Y-HGA';
+        
+        // THIS CODE CREATES OUR MAP OBJECT
         var map = L.mapbox.map('map', 'mapbox.streets')
-            // setView positions where you are looking in the map
+            // '.setView' positions where you are looking in the map
             // how to use: ([x, y], zoom level);
             .setView([29.191, -109.7659], 5);
 
-        // your geojson & heatmap layer(s)
+        // GEOJSON AND HEATMAP LAYERS
         var myLayer = L.mapbox.featureLayer(),
             // heatmap layer created
             heat = L.heatLayer(cities_coord, {
@@ -54,14 +57,14 @@
                 blur: 54 
             });
 
-        // Add custom popups to your layer using HTML + CSS
+        // THIS CODE ADDS POPUPS TO GEOJSON MARKERS using HTML + CSS
         // this function is triggered when the layer is added to the map
         myLayer.on('layeradd', function(e) {
             var marker = e.layer,
                 feature = marker.feature;
 
             // Create custom popup content
-            // this can be easily modified to include pictures, video, etc. with a little knowledge in html and css
+            // this can be easily modified to include pictures, video, etc
             // to modify text and formatting in the popup we use css code
             var popupContent = '<p style="text-align: center"><strong>' + feature.properties.city + '</strong><br>' + feature.properties.country + '</p>';
 
