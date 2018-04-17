@@ -12,6 +12,10 @@
     <!-- mapbox.js links for webmap-->
     <script src='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.js'></script>
     <link href='https://api.mapbox.com/mapbox.js/v3.1.1/mapbox.css' rel='stylesheet' />
+    <!-- heatmap script & jquery-->
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-heat/v0.1.3/leaflet-heat.js'></script>
+    <!-- cities geojson -->
+    <script src="assets/geojson.js"></script>
 </head>
 
 <body>
@@ -37,16 +41,61 @@
     <script>
         L.mapbox.accessToken = 'pk.eyJ1IjoiYnJpYW50ZmEiLCJhIjoiY2oycXJkYXZ1MDAwejJxbzd5d3BkYnZwYyJ9.Xluun3A4EHAaiUUC9Y-HGA';
         var map = L.mapbox.map('map', 'mapbox.streets')
-            .setView([0, 0], 2);
+            // setView positions where you are looking in the map
+            // how to use: ([x, y], zoom level);
+            .setView([29.191, -109.7659], 5);
 
-        L.control.layers({
-            'Mapbox Streets': L.mapbox.tileLayer('mapbox.streets').addTo(map),
-            'Mapbox Light': L.mapbox.tileLayer('mapbox.light'),
-            'Mapbox Dark': L.mapbox.tileLayer('mapbox.dark'),
-            'Mapbox Satelite': L.mapbox.tileLayer('mapbox.satellite')
-        }).addTo(map);
+        // your geojson & heatmap layer(s)
+        var myLayer = L.mapbox.featureLayer(),
+            // heatmap layer created
+            heat = L.heatLayer(cities_coord, {
+                maxZoom: 6,
+                radius: 50,
+                blur: 54
+            });
+
+        // Add custom popups to your layer using HTML + CSS
+        // this function is triggered when the layer is added to the map
+        myLayer.on('layeradd', function(e) {
+            var marker = e.layer,
+                feature = marker.feature;
+
+            // Create custom popup content
+            var popupContent = '<p style="text-align: center"><strong>' + feature.properties.city + '</strong><br>' + feature.properties.country + '</p>';
+
+            // http://leafletjs.com/reference.html#popup
+            marker.bindPopup(popupContent, {
+                closeButton: true, // close button on popup
+                minWidth: 80 // minimum width of the popup in pixels
+            });
+        });
+        // add geaojson data to 'myLayer'
+        myLayer.setGeoJSON(cities);
+
+        // your basemaps
+        var streets = L.mapbox.tileLayer('mapbox.streets').addTo(map),
+            light = L.mapbox.tileLayer('mapbox.light'),
+            dark = L.mapbox.tileLayer('mapbox.dark'),
+            satelite = L.mapbox.tileLayer('mapbox.satellite');
+
+        // base layer controls
+        var baseLayers = {
+            'Mapbox Streets': streets,
+            'Mapbox Light': light,
+            'Mapbox Dark': dark,
+            'Mapbox Satelite': satelite
+        };
+
+        // geojson overlays
+        var overlays = {
+            "Cities": myLayer.addTo(map),
+            "Cities Heat": heat.addTo(map)
+        };
+
+        // add base and feature layers to control widget web map
+        L.control.layers(baseLayers, overlays).addTo(map);
     </script>
-    
+
     <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
 </body>
 
