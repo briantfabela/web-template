@@ -1,3 +1,13 @@
+// Here ('geojson.js') we will store our GeoJson and Heatmap features
+// The features will be put inside variables that area callable ('referenced' by functions when adding them to webmap) in our 'index.html' file or anywhere or anywhere where we link this file to.
+
+/* to link this JavaScript file to '.html' files (our webpages within our website) ame sure to include this line inside the '<head>' section of the html file:
+    <script src="assets/geojson.js"></script>
+    
+    After that the variables inside here like 'cities; can be called from within the <script> section of the html file where our webmap code is.
+*/
+
+// We have loaded our geojson data inside the 'cities' varible 
 var cities = {
     "type": "FeatureCollection",
     "features": [

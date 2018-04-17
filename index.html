@@ -49,9 +49,9 @@
         var myLayer = L.mapbox.featureLayer(),
             // heatmap layer created
             heat = L.heatLayer(cities_coord, {
-                maxZoom: 6,
-                radius: 50,
-                blur: 54
+                maxZoom: 6, // zoom level of webmap
+                radius: 50, // radius of heat produced at point
+                blur: 54 
             });
 
         // Add custom popups to your layer using HTML + CSS
@@ -61,24 +61,27 @@
                 feature = marker.feature;
 
             // Create custom popup content
+            // this can be easily modified to include pictures, video, etc. with a little knowledge in html and css
+            // to modify text and formatting in the popup we use css code
             var popupContent = '<p style="text-align: center"><strong>' + feature.properties.city + '</strong><br>' + feature.properties.country + '</p>';
 
             // http://leafletjs.com/reference.html#popup
             marker.bindPopup(popupContent, {
-                closeButton: true, // close button on popup
+                closeButton: true, // close button available in popup
                 minWidth: 80 // minimum width of the popup in pixels
             });
         });
         // add geaojson data to 'myLayer'
         myLayer.setGeoJSON(cities);
 
-        // your basemaps
+        // your basemaps referenced in the 'baseLayers' variable
+        // we store them in variables
         var streets = L.mapbox.tileLayer('mapbox.streets').addTo(map),
             light = L.mapbox.tileLayer('mapbox.light'),
             dark = L.mapbox.tileLayer('mapbox.dark'),
             satelite = L.mapbox.tileLayer('mapbox.satellite');
 
-        // base layer controls
+        // Include like this -> 'Name': variable where layer is stored
         var baseLayers = {
             'Mapbox Streets': streets,
             'Mapbox Light': light,
@@ -86,7 +89,10 @@
             'Mapbox Satelite': satelite
         };
 
-        // geojson overlays
+        // geojson & Heatmap overlays are included here
+        // as 'overlays' they can be 'checked' on or off the map
+        // add like this -> "Name": variable where layer is stored
+        // .addTo(map) makes the boxes checked when we start the map
         var overlays = {
             "Cities": myLayer.addTo(map),
             "Cities Heat": heat.addTo(map)
